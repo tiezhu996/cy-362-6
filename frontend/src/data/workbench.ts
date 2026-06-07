@@ -24,13 +24,20 @@ export const localFeatures: FeatureItem[] = [
   },
   {
     "id": 4,
+    "title": "玩家评价系统",
+    "description": "支持对剧本和DM分别打分写评语，评价结果在剧本库页面展示平均分和历史列表，帮助新客选本参考。",
+    "status": "已上线",
+    "metric": "10 条"
+  },
+  {
+    "id": 5,
     "title": "会员积分与等级体系",
     "description": "注册会员消费积累积分，设置等级规则（如青铜/白银/黄金/钻石），不同等级享受折扣与优先拼车位权益，积分可兑换周边或抵扣费用。",
     "status": "优化中",
     "metric": "4 级"
   },
   {
-    "id": 5,
+    "id": 6,
     "title": "营收与上座率分析",
     "description": "管理员查看每日/周/月营收报表、各剧本上座率排行、DM带本场次与评分统计，支持导出营业数据。",
     "status": "可导出",
@@ -52,14 +59,14 @@ export const localKpis: KpiItem[] = [
     "tone": "warm"
   },
   {
-    "label": "履约率",
-    "value": "91%",
-    "trend": "+3%",
+    "label": "剧本评分",
+    "value": "4.6",
+    "trend": "⭐ 优秀",
     "tone": "cool"
   },
   {
-    "label": "待处理",
-    "value": "6",
+    "label": "累计评价",
+    "value": "42",
     "trend": "需跟进",
     "tone": "neutral"
   }
@@ -92,6 +99,14 @@ export const operationRecords: OperationRecord[] = [
   },
   {
     "key": "ldmurdergame-4",
+    "name": "玩家评价系统",
+    "owner": "产品组",
+    "status": "已上线",
+    "metric": "10 条",
+    "priority": "高"
+  },
+  {
+    "key": "ldmurdergame-5",
     "name": "会员积分与等级体系",
     "owner": "财务组",
     "status": "优化中",
@@ -99,7 +114,7 @@ export const operationRecords: OperationRecord[] = [
     "priority": "高"
   },
   {
-    "key": "ldmurdergame-5",
+    "key": "ldmurdergame-6",
     "name": "营收与上座率分析",
     "owner": "审核组",
     "status": "可导出",

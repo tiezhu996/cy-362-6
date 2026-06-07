@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generated.ldmurdergame.mapper.ReviewMapper">
+
+  <resultMap id="ReviewResultMap" type="com.generated.ldmurdergame.model.Review">
+    <id column="id" property="id"/>
+    <result column="group_session_id" property="groupSessionId"/>
+    <result column="script_id" property="scriptId"/>
+    <result column="script_name" property="scriptName"/>
+    <result column="dm_id" property="dmId"/>
+    <result column="dm_name" property="dmName"/>
+    <result column="player_name" property="playerName"/>
+    <result column="script_rating" property="scriptRating"/>
+    <result column="script_comment" property="scriptComment"/>
+    <result column="dm_rating" property="dmRating"/>
+    <result column="dm_comment" property="dmComment"/>
+    <result column="created_at" property="createdAt"/>
+  </resultMap>
+
+  <insert id="insert" parameterType="com.generated.ldmurdergame.model.ReviewRequest">
+    INSERT INTO reviews (group_session_id, script_id, dm_id, player_name, script_rating, script_comment, dm_rating, dm_comment)
+    VALUES (#{groupSessionId}, #{scriptId}, #{dmId}, #{playerName}, #{scriptRating}, #{scriptComment}, #{dmRating}, #{dmComment})
+  </insert>
+
+  <select id="findByScriptId" resultMap="ReviewResultMap">
+    SELECT
+      r.id,
+      r.group_session_id,
+      r.script_id,
+      s.name as script_name,
+      r.dm_id,
+      d.name as dm_name,
+      r.player_name,
+      r.script_rating,
+      r.script_comment,
+      r.dm_rating,
+      r.dm_comment,
+      r.created_at
+    FROM reviews r
+    JOIN scripts s ON r.script_id = s.id
+    JOIN dms d ON r.dm_id = d.id
+    WHERE r.script_id = #{scriptId}
+    ORDER BY r.created_at DESC
+  </select>
+
+  <select id="findByDmId" resultMap="ReviewResultMap">
+    SELECT
+      r.id,
+      r.group_session_id,
+      r.script_id,
+      s.name as script_name,
+      r.dm_id,
+      d.name as dm_name,
+      r.player_name,
+      r.script_rating,
+      r.script_comment,
+      r.dm_rating,
+      r.dm_comment,
+      r.created_at
+    FROM reviews r
+    JOIN scripts s ON r.script_id = s.id
+    JOIN dms d ON r.dm_id = d.id
+    WHERE r.dm_id = #{dmId}
+    ORDER BY r.created_at DESC
+  </select>
+
+  <select id="findByGroupSessionId" resultMap="ReviewResultMap">
+    SELECT
+      r.id,
+      r.group_session_id,
+      r.script_id,
+      s.name as script_name,
+      r.dm_id,
+      d.name as dm_name,
+      r.player_name,
+      r.script_rating,
+      r.script_comment,
+      r.dm_rating,
+      r.dm_comment,
+      r.created_at
+    FROM reviews r
+    JOIN scripts s ON r.script_id = s.id
+    JOIN dms d ON r.dm_id = d.id
+    WHERE r.group_session_id = #{groupId}
+    ORDER BY r.created_at DESC
+  </select>
+
+  <select id="findByGroupSessionIdAndPlayerName" resultMap="ReviewResultMap">
+    SELECT
+      r.id,
+      r.group_session_id,
+      r.script_id,
+      s.name as script_name,
+      r.dm_id,
+      d.name as dm_name,
+      r.player_name,
+      r.script_rating,
+      r.script_comment,
+      r.dm_rating,
+      r.dm_comment,
+      r.created_at
+    FROM reviews r
+    JOIN scripts s ON r.script_id = s.id
+    JOIN dms d ON r.dm_id = d.id
+    WHERE r.group_session_id = #{groupId} AND r.player_name = #{playerName}
+  </select>
+
+  <select id="getAvgScriptRatingByScriptId" resultType="java.lang.Double">
+    SELECT ROUND(AVG(script_rating)::numeric, 1) FROM reviews WHERE script_id = #{scriptId}
+  </select>
+
+  <select id="getAvgDmRatingByDmId" resultType="java.lang.Double">
+    SELECT ROUND(AVG(dm_rating)::numeric, 1) FROM reviews WHERE dm_id = #{dmId}
+  </select>
+
+  <select id="countReviewsByScriptId" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM reviews WHERE script_id = #{scriptId}
+  </select>
+
+  <select id="countReviewsByDmId" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM reviews WHERE dm_id = #{dmId}
+  </select>
+
+</mapper>
